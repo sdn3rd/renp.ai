@@ -34,6 +34,8 @@ The script can be run from the command line and offers several options:
 ### Example Command
 python parser.py --input_dir "path/to/rpy/scripts" --output "output_file.json" --include_face_lines
 
+The include_face_lines flag is for sprite emotions, should you have them in your game.  Please update the regex within the script to make this work for your game or do not use this flag.
+
 
 ## Output Format
 The output is a JSON array, where each object represents a label from the Ren'Py script. Each object contains:
