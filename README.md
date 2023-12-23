@@ -15,6 +15,14 @@ This Python script is designed to parse Ren'Py script files (`.rpy`) to extract 
 - **Filtering Mechanism**: Filters out labels with insufficient content (less than four lines) to ensure meaningful output.
 
 ## Usage
+This script expects that you will be using a local LLM and training a Lora for your game dialogue specifically.
+
+If you do not have text-generation-webui installed, please visit: https://github.com/oobabooga/text-generation-webui
+
+Once you have this installed, I would recommend training against: https://huggingface.co/georgesung/llama2_7b_chat_uncensored
+
+This has been validated to work, I have not tested anything else.  This is literally day 2 of me using LocalLLMs and I just barely read about QLora's give me a break.
+
 The script can be run from the command line and offers several options:
 
 - `--input_dir <path>`: Specify the path to a directory for recursive processing of all `.rpy` files within it.
