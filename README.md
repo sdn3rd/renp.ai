@@ -1,7 +1,7 @@
 # renp.ai
 AI utils and tools related to AI and the Renpy Engine
 
-# Ren'Py Dialogue and Face Line Extractor
+# Ren'Py Dialogue and Face Line Extractor to LLM dataset for training Local models
 
 ## Description
 This Python script is designed to parse Ren'Py script files (`.rpy`) to extract dialogue and face lines. It is particularly useful for processing visual novel scripts written in Ren'Py, enabling writers and developers to easily extract and analyze dialogue and character expressions. The script can handle both individual `.rpy` files and recursively process a directory containing multiple `.rpy` files.
