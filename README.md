@@ -4,13 +4,12 @@ AI utils and tools related to AI and the Renpy Engine
 # Ren'Py Dialogue and Face Line Extractor to LLM dataset for training Local models
 
 ## Description
-This Python script is designed to parse Ren'Py script files (`.rpy`) to extract dialogue and face lines. It is particularly useful for processing visual novel scripts written in Ren'Py, enabling writers and developers to easily extract and analyze dialogue and character expressions. The script can handle both individual `.rpy` files and recursively process a directory containing multiple `.rpy` files.
+This Python script is designed to parse Ren'Py script files (`.rpy`) to extract dialogue and convert it to a local LLM training format to fine-tune your model as a Lora.
 
 ## Features
-- **Dialogue and Face Line Extraction**: Extracts both dialogue lines and face expression commands from Ren'Py script files.
-- **Include Face Lines Toggle**: Option to include or exclude face lines in the output.
-- **Recursive Directory Processing**: Ability to process an entire directory of `.rpy` files recursively.
-- **Flexible Output Formatting**: Outputs extracted data in a structured JSON format, suitable for further processing or analysis.
+- **Dialogue and Emotion Line Extraction**: Extracts both dialogue lines and face expression commands from Ren'Py script files.
+- **Include Face Lines Toggle**: Option to include or exclude face lines in the output, if you do not have emotions in your game.
+- **Recursive Directory Processing**: Ability to process an entire directory of `.rpy` files recursively and output to a single flat training file.
 - **Customizable Output**: Provides an option to write output to a specified file or print it to the command line interface (CLI).
 - **Filtering Mechanism**: Filters out labels with insufficient content (less than four lines) to ensure meaningful output.
 
