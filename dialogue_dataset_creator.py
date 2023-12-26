@@ -53,8 +53,7 @@ class RenPyLexer:
         formatted_output = ""
         for label, content in elements.items():
             formatted_output += f"label {label}:\n"
-            for line in content:
-                formatted_output += f"{line}\n"
+            formatted_output += "\n".join(content) + "\n"
         return formatted_output
 
     def _format_for_llama(self, elements):
@@ -75,7 +74,6 @@ def read_file(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             lines = file.readlines()
-            logging.info(f"Read {len(lines)} lines from {file_path}")
             return lines
     except Exception as e:
         logging.error(f"Error while reading file {file_path}: {e}")
@@ -93,7 +91,6 @@ def read_directory(directory_path, recursive=False):
             for file in os.listdir(directory_path):
                 if file.endswith('.rpy'):
                     file_paths.append(os.path.join(directory_path, file))
-        logging.info(f"Found {len(file_paths)} .rpy files.")
     except Exception as e:
         logging.error(f"Error while reading directory {directory_path}: {e}")
     return file_paths
@@ -112,8 +109,6 @@ def write_output(output, file_path=None):
         try:
             with open(file_path, 'w', encoding='utf-8') as file:
                 file.write(output)
-            if logging.getLogger().level == logging.DEBUG:
-                logging.info(f"Successfully wrote output to {file_path}")
         except Exception as e:
             logging.error(f"Error while writing to file {file_path}: {e}")
     else:
@@ -133,26 +128,25 @@ def main():
         if os.path.isdir(args.file):
             file_paths = read_directory(args.file, args.recursive)
             for file_path in file_paths:
-                formatted_output = process_file(file_path, args.type)
-                all_output.extend(formatted_output)
+                lines = read_file(file_path)
+                if lines:
+                    lexer = RenPyLexer()
+                    elements = lexer.parse_file(lines)
+                    formatted_output = lexer.format_elements(elements, args.type)
+                    all_output.append(formatted_output)
         else:
-            formatted_output = process_file(args.file, args.type)
-            all_output.extend(formatted_output)
+            lines = read_file(args.file)
+            if lines:
+                lexer = RenPyLexer()
+                elements = lexer.parse_file(lines)
+                formatted_output = lexer.format_elements(elements, args.type)
+                all_output.append(formatted_output)
 
-        formatted_output = json.dumps(all_output, indent=4, ensure_ascii=False) if args.type == 'llama' else "\n".join(all_output)
-        write_output(formatted_output, args.output)
+        final_output = json.dumps(all_output, indent=4, ensure_ascii=False) if args.type == 'llama' else "\n".join(all_output)
+        write_output(final_output, args.output)
 
     except Exception as e:
         logging.error(f"An error occurred: {e}")
-
-def process_file(file_path, output_type):
-    lines = read_file(file_path)
-    if not lines:
-        logging.error(f"No content to process in {file_path}.")
-        return []
-    lexer = RenPyLexer()
-    elements = lexer.parse_file(lines)
-    return lexer.format_elements(elements, output_type)
 
 if __name__ == "__main__":
     main()
