@@ -16,11 +16,11 @@ This Python script is designed to parse Ren'Py script files (`.rpy`) to extract 
 ## Usage
 This script expects that you will be using a local LLM and training a Lora for your game dialogue specifically.
 
-If you do not have text-generation-webui installed, please visit: https://github.com/oobabooga/text-generation-webui
+If you do not have `text-generation-webui` installed, please visit: [https://github.com/oobabooga/text-generation-webui](https://github.com/oobabooga/text-generation-webui)
 
-Once you have this installed, I would recommend training against: https://huggingface.co/georgesung/llama2_7b_chat_uncensored
+Once you have this installed, I would recommend training against: [https://huggingface.co/georgesung/llama2_7b_chat_uncensored](https://huggingface.co/georgesung/llama2_7b_chat_uncensored)
 
-This has been validated to work, I have not tested anything else.  This is literally day 2 of me using LocalLLMs and I just barely read about QLora's give me a break.
+This has been validated to work, I have not tested anything else. This is literally day 2 of me using LocalLLMs and I just barely read about QLora's give me a break.
 
 The script can be run from the command line and offers several options:
 
@@ -31,16 +31,16 @@ The script can be run from the command line and offers several options:
 - `-h`: Display help information about the script's usage and options.
 
 ### Example Command
+
 python parser.py --input_dir "path/to/rpy/scripts" --output "output_file.json" --include_face_lines
-
-The include_face_lines flag is for sprite emotions, should you have them in your game.  Please update the regex within the script to make this work for your game or do not use this flag.
-
+The include_face_lines flag is for sprite emotions, should you have them in your game. Please update the regex within the script to make this work for your game or do not use this flag.
 
 ## Output Format
 The output is a JSON array, where each object represents a label from the Ren'Py script. Each object contains:
-- `"instruction"`: A generated instruction based on the speakers involved in the dialogue under that label.
-- `"input"`: Currently unused, reserved for future enhancements.
-- `"output"`: The extracted dialogue and/or face lines formatted in Ren'Py script style.
+
+"instruction": A generated instruction based on the speakers involved in the dialogue under that label.
+"input": Currently unused, reserved for future enhancements.
+"output": The extracted dialogue and/or face lines formatted in Ren'Py script style.
 
 ## Requirements
 - Python 3.x
